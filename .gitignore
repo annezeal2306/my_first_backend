@@ -3,3 +3,6 @@ tasks.db
 
 # Python cache
 __pycache__/
+
+# Virtual Environment
+venv/
