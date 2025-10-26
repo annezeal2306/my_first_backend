@@ -1,0 +1,5 @@
+# Database file
+tasks.db
+
+# Python cache
+__pycache__/
