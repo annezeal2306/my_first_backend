@@ -21,11 +21,7 @@ if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
 
 # Create the SQLAlchemy "engine"
 # This is the main connection point to our database
-engine = create_engine(
-    DATABASE_URL, 
-    # This setting is required for SQLite when used with FastAPI
-    connect_args={"check_same_thread": False} 
-)
+engine = create_engine(DATABASE_URL)
 
 # Create a "SessionLocal" class
 # Each instance of this class will be a new database session
