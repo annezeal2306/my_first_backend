@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, select, insert, delete, update
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 from sqlalchemy.exc import NoResultFound
-
+from fastapi.middleware.cors import CORSMiddleware
 # --- 1. DATABASE SETUP ---
 
 # Define the database file
@@ -25,6 +25,9 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # Our database model (the 'Task' table) will inherit from this
 Base = declarative_base()
 
+origins = [
+    "http://localhost:5173",
+]
 # --- 2. DEFINE THE 'tasks' TABLE MODEL ---
 
 # This class defines the 'tasks' table in our database
@@ -140,3 +143,11 @@ def delete_task(task_id: int):
         db.commit() # Save the changes
         
         return {"status": "success", "message": f"Task {task_id} deleted"}
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"], # Allow all headers
+)
