@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 // The API_BASE_URL is your backend.
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://my-task-api-cad8.onrender.com";
 
 function App() {
   // State for the list of tasks
