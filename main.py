@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, select, insert, delete, update
@@ -7,7 +9,15 @@ from fastapi.middleware.cors import CORSMiddleware
 # --- 1. DATABASE SETUP ---
 
 # Define the database file
-DATABASE_URL = "sqlite:///./tasks.db"
+load_dotenv() # Load environment variables from a .env file (for local testing)
+
+# The new DATABASE_URL is read from the server's environment
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# We need to tell SQLAlchemy our new URL starts with 'postgresql' instead of 'postgres'
+# The new Render URLs need this fix.
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # Create the SQLAlchemy "engine"
 # This is the main connection point to our database
