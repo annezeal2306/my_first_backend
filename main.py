@@ -33,6 +33,7 @@ Base = declarative_base()
 
 origins = [
     "http://localhost:5173",
+    "https://my-react-app-six-wine.vercel.app"
 ]
 # --- 2. DEFINE THE 'tasks' TABLE MODEL ---
 
